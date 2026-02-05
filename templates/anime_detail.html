@@ -14,9 +14,9 @@
     <img src="{{ anime.images.jpg.large_image_url }}" alt="{{ anime.title }}">
     <form method="post" action="/add/">
       {% csrf_token %}
-      <input type="hidden" name="mal_id" value="{{ a.mal_id }}">
-      <input type="hidden" name="title" value="{{ a.title }}">
-      <input type="hidden" name="image" value="{{ a.images.jpg.image_url }}">
+      <input type="hidden" name="mal_id" value="{{ anime.mal_id }}">
+      <input type="hidden" name="title" value="{{ anime.title }}">
+      <input type="hidden" name="image" value="{{ anime.images.jpg.image_url }}">
       <button>Add</button>
     </form>
     <p>{{ anime.synopsis }}</p>
