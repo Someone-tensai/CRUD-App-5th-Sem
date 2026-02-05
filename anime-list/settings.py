@@ -30,7 +30,6 @@ CSRF_TRUSTED_ORIGINS = [
     "https://crud-app-5th-sem-production.up.railway.app"
 ]
 MIDDLEWARE = [
-    
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -70,7 +69,13 @@ DATABASES = {
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
-
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 LOGIN_URL = "/login/"
+
+SESSION_COOKIE_SECURE = True  # for HTTPS
+CSRF_COOKIE_SECURE = True     # for HTTPS
+SESSION_COOKIE_SAMESITE = 'Lax'
