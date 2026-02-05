@@ -17,6 +17,7 @@ def register_view(request):
         }).execute()
         # auto login after signup
         request.session["user_id"] = res.user.id
+        request.session.modified = True
         return redirect("/anime/")
 
     return render(request, "register.html")
