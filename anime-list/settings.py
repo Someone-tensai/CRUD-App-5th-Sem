@@ -38,7 +38,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'your_app_name.middleware.SupabaseAuthMiddleware', 
+    'anime-list.middleware.SupabaseAuthMiddleware', 
 ]
 
 ROOT_URLCONF = 'anime-list.urls'
