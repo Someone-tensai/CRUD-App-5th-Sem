@@ -10,9 +10,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'lab-secret-key'
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["crud-app-5th-sem-production.up.railway.app"]
+ALLOWED_HOSTS = [
+    "crud-app-5th-sem-production.up.railway.app",
+    "localhost",
+    "127.0.0.1"]
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -26,9 +30,7 @@ INSTALLED_APPS = [
     'anime',
 ]
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://crud-app-5th-sem-production.up.railway.app"
-]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -77,7 +79,12 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/anime/"
-SESSION_COOKIE_SECURE = True  # for HTTPS
-CSRF_COOKIE_SECURE = True     # for HTTPS
-SECURE_SSL_REDIRECT = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+if not DEBUG:
+    CSRF_TRUSTED_ORIGINS = [
+    "https://crud-app-5th-sem-production.up.railway.app"
+    ]
+    SESSION_COOKIE_SECURE = True  # for HTTPS
+    CSRF_COOKIE_SECURE = True     # for HTTPS
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
