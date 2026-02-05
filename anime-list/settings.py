@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'lab-secret-key'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "crud-app-5th-sem-production.up.railway.app",
