@@ -12,7 +12,7 @@ SECRET_KEY = 'lab-secret-key'
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["crud-app-5th-sem-production.up.railway.app"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -26,6 +26,9 @@ INSTALLED_APPS = [
     'anime',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://crud-app-5th-sem-production.up.railway.app"
+]
 MIDDLEWARE = [
     
     'django.middleware.security.SecurityMiddleware',
@@ -68,8 +71,6 @@ DATABASES = {
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-
-STATICFILES_DIRS = [BASE_DIR / "static"]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 LOGIN_URL = "/login/"

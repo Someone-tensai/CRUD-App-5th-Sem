@@ -2,7 +2,8 @@
 <html>
 <head>
     <title>{{ anime.title }}</title>
-    <link rel="stylesheet" href="/static/style.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 </head>
 <body>
 
