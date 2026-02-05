@@ -1,0 +1,170 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #111;
+    color: #eee;
+    padding: 20px;
+    margin: 0;
+}
+
+a {
+    color: #7dd3fc;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #38bdf8;
+    text-decoration: underline;
+}
+.card-link {
+    text-decoration: none;
+    color: inherit;
+}
+.redir {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box h2 {
+    text-align: center;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+form input {
+    flex: 1;
+    max-width: 300px;
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+}
+
+form button {
+    padding: 8px 15px;
+    border-radius: 3px;
+    border: none;
+    background-color: #3b82f6;
+    color: white;
+   
+}
+
+a.logout {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 6px 12px;
+    background-color: #222;
+    border-radius: 6px;
+}
+
+a.logout:hover {
+    background-color: #333;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    justify-items: center;
+}
+
+.card {
+    background-color: #1a1a1a;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.card p {
+    font-size: 14px;
+    color: #ccc;
+    height: 40px; 
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.card a {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 6px 10px;
+    background-color: #3b82f6;
+    color: white;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.card a:hover {
+    background-color: #2563eb;
+}
+
+.anime-detail {
+    max-width: 700px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.anime-detail img {
+    border-radius: 8px;
+    margin-bottom: 15px;
+    height: 50vh;
+}
+
+.anime-detail a {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 8px 15px;
+    background-color: #3b82f6;
+    color: white;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.anime-detail a:hover {
+    background-color: #2563eb;
+}
+
+@media (max-width: 500px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    form input, form button {
+        width: 80%;
+        border-radius: 6px;
+        margin: 5px 0;
+    }
+}

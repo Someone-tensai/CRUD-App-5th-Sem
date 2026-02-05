@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Anime List</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1>Anime List</h1>
+<a href="/logout/">Logout</a>
+
+<form method="get">
+  <input name="q" placeholder="Search anime">
+  <button>Search</button>
+</form>
+
+<p class="redir"><a href="/my-list/">My List</a></p>
+
+<div class="grid">
+{% for a in anime %}
+  <div class="card">
+    <img src="{{ a.images.jpg.image_url }}">
+    <h3>{{ a.title }}</h3>
+
+    
+    <a href="/anime/{{ a.mal_id }}/">View</a>
+
+  </div>
+{% endfor %}
+</div>
+
+</body>
+</html>

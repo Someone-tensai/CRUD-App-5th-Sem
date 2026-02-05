@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My List</title>
+  <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+  <h1>My Anime List</h1>
+
+<div class="grid">
+{% for a in anime %}
+  <div class="card">
+    <img src="{{ a.image_url }}">
+    <h3>{{ a.title }}</h3>
+
+    <form method="post" action="/update/">
+      {% csrf_token %}
+      <input type="hidden" name="id" value="{{ a.id }}">
+      <select name="status">
+        <option>{{ a.status }}</option>
+        <option>planned</option>
+        <option>watching</option>
+        <option>completed</option>
+      </select>
+      <button>Save</button>
+    </form>
+
+    <form method="post" action="/delete/">
+      {% csrf_token %}
+      <input type="hidden" name="id" value="{{ a.id }}">
+      <button>Remove</button>
+    </form>
+  </div>
+{% endfor %}
+</div>
+</body>
+</html>
