@@ -1,1 +1,1 @@
-web: gunicorn anime-list.wsgi
+web: python manage.py migrate && python manage.py collectstatic --noinput && gunicorn anime-list.wsgi
