@@ -7,41 +7,36 @@ def register_view(request):
         password = request.POST["password"]
 
         try:
-            # Sign up user
             auth_res = supabase.auth.sign_up({
                 "email": email,
                 "password": password
             })
             
-            # Check if user was created
             if not auth_res.user:
                 return render(request, "register.html", {"error": "Registration failed"})
             
             user_id = auth_res.user.id
             
-            # Insert profile - separate try-catch so auth success still logs in
-            try:
-                supabase.table("profiles").insert({
-                    "id": user_id,
-                    "username": email.split("@")[0]
-                }).execute()
-            except Exception as profile_error:
-                print(f"Profile creation error (continuing): {profile_error}")
+            supabase.table("profiles").insert({
+                "id": user_id,
+                "username": email.split("@")[0]
+            }).execute()
             
-            # Auto login after signup
             request.session["user_id"] = user_id
             request.session.modified = True
-            print(f"User registered and logged in: {user_id}")  # Debug
+            print(f"User registered and logged in: {user_id}")
             return redirect("/anime/")
             
         except Exception as e:
             error_msg = str(e)
             print(f"Registration error: {error_msg}")
             
-            if "already registered" in error_msg.lower():
-                error_msg = "Email already registered. Try logging in."
+            if "duplicate" in error_msg.lower() or "already exists" in error_msg.lower():
+                error_msg = "Email already registered or username taken. Try logging in."
             elif "password" in error_msg.lower():
                 error_msg = "Password must be at least 6 characters"
+            elif "profiles" in error_msg.lower():
+                error_msg = "Could not create user profile. Please try again."
             
             return render(request, "register.html", {"error": error_msg})
     
@@ -83,15 +78,23 @@ def logout_view(request):
 
 def add_to_list(request):
     if request.method == "POST":
-        # Check session
         if "user_id" not in request.session:
             print("Add to list: No user_id in session")
             return redirect("/login/")
         
         user_id = request.session["user_id"]
-        print(f"Adding anime for user: {user_id}")  # Debug
+        print(f"Adding anime for user: {user_id}")
         
         try:
+            profile_check = supabase.table("profiles").select("id").eq("id", user_id).execute()
+            
+            if not profile_check.data:
+                print(f"Profile missing for {user_id}, creating...")
+                supabase.table("profiles").insert({
+                    "id": user_id,
+                    "username": f"user_{user_id[:8]}"  # Fallback username
+                }).execute()
+            
             supabase.table("anime_list").insert({
                 "user_id": user_id,
                 "mal_id": request.POST["mal_id"],
@@ -105,7 +108,6 @@ def add_to_list(request):
 
 
 def my_list(request):
-    # Check session
     if "user_id" not in request.session:
         print("My list: No user_id in session")
         return redirect("/login/")
